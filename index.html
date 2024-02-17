@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>テキストボックスの入力</title>
+</head>
+<body>
+
+<!-- テキストボックス -->
+<p>動かす番号を記入してください</p>
+<p><input type="text" id="textbox1" placeholder="例）L213"></p>
+<p>動かした後の場所を記入してください</p>
+<input type="text" id="textbox2" placeholder="例）第5工場">
+
+<!-- 送信ボタン -->
+<button onclick="submitText()">送信</button>
+
+<!-- 結果表示用の要素 -->
+<div id="results"></div>
+
+<script>
+function submitText() {
+    // テキストボックスの値を取得
+    var text1 = document.getElementById("textbox1").value;
+    var text2 = document.getElementById("textbox2").value;
+    
+    // 現在の日付と時刻を取得
+    var currentDate = new Date();
+    var year = currentDate.getFullYear();
+    var month = pad(currentDate.getMonth() + 1); // 月を取得してゼロ埋めする
+    var day = pad(currentDate.getDate()); // 日を取得してゼロ埋めする
+    var hours = pad(currentDate.getHours()); // 時を取得してゼロ埋めする
+    var minutes = pad(currentDate.getMinutes()); // 分を取得してゼロ埋めする
+    var seconds = pad(currentDate.getSeconds()); // 秒を取得してゼロ埋めする
+    
+    // 時刻を整形
+    var formattedTime = hours + ":" + minutes + ":" + seconds;
+
+    // 結果を表示
+    var resultsDiv = document.getElementById("results");
+    var resultElement = document.createElement("div");
+    resultElement.innerHTML =  text1 +"を"+ text2 + "に移動させました。　投稿日時: 　" + year + "-" + month + "-" + day + " " + formattedTime + "<hr>";
+    resultsDiv.insertBefore(resultElement, resultsDiv.firstChild);
+}
+
+// 数値をゼロ埋めするための関数
+function pad(num) {
+    return (num < 10 ? '0' : '') + num;
+}
+</script>
+
+</body>
+</html>
